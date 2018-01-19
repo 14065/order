@@ -84,4 +84,20 @@ Public Class frmDialog
 
 #End Region
 
+    '
+    'Valueプロパティ
+    '
+    Public Property Value() As String
+        '参照
+        Get
+            Return txtKey.Text
+        End Get
+
+        '更新
+        Set(ByVal Value As String)
+
+        End Set
+    End Property
+
+
 End Class
