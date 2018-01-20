@@ -259,7 +259,39 @@ Public Class frmShohin
     '［閉じる］メニュー
     '
     Private Sub mnuFileQuilt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuFileQuilt.Click
-        Me.Close()
+        Dim flg As Boolean        '変更されたかどうか
+        Dim btn As DialogResult   '選択したボタン
+
+        'カレントレコードの編集を終了
+        Me.BindingContext(dvShohin).EndCurrentEdit()
+
+        '変更されたかどうか
+        flg = DsSample1.HasChanges()
+
+        '変更されていないとき
+        If flg = False Then
+            Me.Close()
+            Exit Sub
+        End If
+
+        '変更されているとき
+        btn = MessageBox.Show("編集結果が保存されていません。" _
+        & ControlChars.CrLf & "保存して終了しますか？", "商品登録",
+        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+
+        Select Case btn
+            Case DialogResult.Yes    'はい
+                '保存して終了
+                m_fm.odaShohin.Update(DsSample1, "T_商品")
+                Me.Close()
+
+            Case DialogResult.No   'いいえ
+                '保存せずに終了
+                Me.Close()
+
+            Case DialogResult.Cancel 'キャンセル
+                '何もしない
+        End Select
     End Sub
 
     '------------------------
@@ -294,5 +326,45 @@ Public Class frmShohin
                   MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         dvShohin.Sort = ""
+    End Sub
+
+
+    '--------------------
+    '［再ロード］メニュー
+    '
+    Private Sub mnuFileLoad_Click(sender As Object, e As EventArgs) Handles mnuFileLoad.Click
+        Dim btn As DialogResult  '選択したボタン
+
+        '確認
+        btn = MessageBox.Show("編集中のデータを破棄して、データを再ロードします。" _
+            & ControlChars.CrLf & "よろしいですか", "商品登録",
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+
+        'キャンセルボタンを選択
+        If btn = DialogResult.Cancel Then
+            Exit Sub
+        End If
+
+        'データセットの初期化
+        DsSample1.Clear()
+
+        'フィルタ並べ替え解除
+        dvShohin.RowFilter = ""
+        dvShohin.Sort = ""
+
+        'データ読み込み
+        m_fm.odaShohin.Fill(DsSample1, "T_商品")
+        Me.BindingContext(dvShohin).Position = 0
+    End Sub
+
+    '
+    '［上書き保存］メニュー
+    '
+    Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
+        '編集を終了
+        Me.BindingContext(dvShohin).EndCurrentEdit()
+
+        '保存
+        m_fm.odaShohin.Update(DsSample1, "T_商品")
     End Sub
 End Class
