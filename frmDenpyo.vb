@@ -438,7 +438,40 @@ Public Class frmDenpyo
     '［閉じる］メニュー
     '
     Private Sub mnuFileQuit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuFileQuit.Click
-        Me.Close()
+        Dim flg As Boolean         '変更されたかどうか
+        Dim btn As DialogResult    '選択したボタン
+
+        '編集の確認
+        ChkModified()
+
+        '変更されたかどうか
+        flg = DsSample1.HasChanges()
+
+        '変更されていないとき
+        If flg = False Then
+            Me.Close()
+            Exit Sub
+        End If
+
+        '変更されているとき
+        btn = MessageBox.Show("編集結果が保存されていません。" _
+            & ControlChars.CrLf & "保存して終了しますか？", "伝票入力",
+            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+
+        Select Case btn
+            Case DialogResult.Yes    'はい
+                '保存して終了
+                m_fm.odaMain.Update(DsSample1, "T_メイン")
+                m_fm.odaSub.Update(DsSample1, "T_サブ")
+                Me.Close()
+
+            Case DialogResult.No   'いいえ
+                '保存せずに終了
+                Me.Close()
+
+            Case DialogResult.Cancel 'キャンセル
+                '何もしない
+        End Select
     End Sub
 
 
@@ -703,6 +736,75 @@ Public Class frmDenpyo
 
         Else
             MessageBox.Show("該当する［注文NO］はありません", "伝票入力")
+        End If
+    End Sub
+
+    '-------------------
+    '［再ロード］メニュー
+    '
+    Private Sub mnuFileLoad_Click(sender As Object, e As EventArgs) Handles mnuFileLoad.Click
+        Dim btn As DialogResult   '選択したボタン
+
+        '確認
+        btn = MessageBox.Show("編集中のデータを破棄して、データを再ロードします。" _
+            & ControlChars.CrLf & "よろしいですか", "伝票入力",
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+
+        'キャンセルボタンを選択
+        If btn = DialogResult.Cancel Then
+            Exit Sub
+        End If
+
+        'データセットの初期化
+        DsSample1.Clear()
+        DsSample1.T_サブ.Columns.Remove("金額")
+
+        'データ読み込み
+        m_fm.odaMain.Fill(DsSample1, "T_メイン")
+        m_fm.odaSub.Fill(DsSample1, "T_サブ")
+        m_fm.odaKokyaku.Fill(DsSample1, "T_顧客")
+        m_fm.odaShain.Fill(DsSample1, "T_社員")
+        m_fm.odaShohin.Fill(DsSample1, "T_商品")
+
+        '演算フィールド
+        DsSample1.T_サブ.Columns("金額").Expression = "単価*数量"
+
+        '初期化
+        DispPosition()
+        DispName()
+    End Sub
+
+    '
+    '［上書き保存］メニュー
+    '
+    Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
+        '編集の確認
+        ChkModified()
+
+        '保存
+        m_fm.odaMain.Update(DsSample1, "T_メイン")
+        m_fm.odaSub.Update(DsSample1, "T_サブ")
+    End Sub
+
+
+    '
+    '［伝票削除］メニュー
+    '
+    Private Sub mnuEditDelete_Click(sender As Object, e As EventArgs) Handles mnuEditDelete.Click
+        Dim btn As DialogResult    '選択したボタン
+        Dim iPos As Integer   'レコード位置
+
+        '確認
+        btn = MessageBox.Show("注文NO  " & txtNo.Text & "  を削除します。" _
+                              & "よろしいですか", "伝票削除",
+                              MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        '削除
+        If btn = DialogResult.Yes Then
+            iPos = Me.BindingContext(DsSample1, "T_メイン").Position
+            Me.BindingContext(DsSample1, "T_メイン").RemoveAt(iPos)
+            DispPosition()
+            DispName()
         End If
     End Sub
 End Class
