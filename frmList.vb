@@ -52,6 +52,7 @@ Public Class frmList
     Friend WithEvents mnuFile As System.Windows.Forms.MenuItem
     Friend WithEvents mnuFileQuit As System.Windows.Forms.MenuItem
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnDetail = New System.Windows.Forms.Button()
         Me.txtNo = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -69,7 +70,7 @@ Public Class frmList
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnFind = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
-        Me.MainMenu1 = New System.Windows.Forms.MainMenu()
+        Me.MainMenu1 = New System.Windows.Forms.MainMenu(Me.components)
         Me.mnuFile = New System.Windows.Forms.MenuItem()
         Me.mnuFileQuit = New System.Windows.Forms.MenuItem()
         Me.DsSample1 = New SampleAppli.dsSample()
@@ -81,24 +82,24 @@ Public Class frmList
         '
         'btnDetail
         '
-        Me.btnDetail.Location = New System.Drawing.Point(384, 192)
+        Me.btnDetail.Location = New System.Drawing.Point(538, 240)
         Me.btnDetail.Name = "btnDetail"
+        Me.btnDetail.Size = New System.Drawing.Size(105, 29)
         Me.btnDetail.TabIndex = 33
         Me.btnDetail.Text = "詳細表示"
         '
         'txtNo
         '
-        Me.txtNo.Location = New System.Drawing.Point(312, 192)
+        Me.txtNo.Location = New System.Drawing.Point(437, 240)
         Me.txtNo.Name = "txtNo"
-        Me.txtNo.Size = New System.Drawing.Size(56, 19)
+        Me.txtNo.Size = New System.Drawing.Size(78, 22)
         Me.txtNo.TabIndex = 32
-        Me.txtNo.Text = ""
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(256, 192)
+        Me.Label5.Location = New System.Drawing.Point(358, 240)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(56, 23)
+        Me.Label5.Size = New System.Drawing.Size(79, 29)
         Me.Label5.TabIndex = 31
         Me.Label5.Text = "注文NO"
         '
@@ -106,121 +107,115 @@ Public Class frmList
         '
         Me.dbgDetail.DataMember = ""
         Me.dbgDetail.HeaderForeColor = System.Drawing.SystemColors.ControlText
-        Me.dbgDetail.Location = New System.Drawing.Point(80, 232)
+        Me.dbgDetail.Location = New System.Drawing.Point(112, 290)
         Me.dbgDetail.Name = "dbgDetail"
         Me.dbgDetail.ReadOnly = True
-        Me.dbgDetail.Size = New System.Drawing.Size(384, 160)
+        Me.dbgDetail.Size = New System.Drawing.Size(538, 200)
         Me.dbgDetail.TabIndex = 30
         '
         'Label4
         '
-        Me.Label4.Location = New System.Drawing.Point(16, 232)
+        Me.Label4.Location = New System.Drawing.Point(22, 290)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 23)
+        Me.Label4.Size = New System.Drawing.Size(79, 29)
         Me.Label4.TabIndex = 29
         Me.Label4.Text = "注文詳細"
         '
         'Label3
         '
-        Me.Label3.Location = New System.Drawing.Point(16, 48)
+        Me.Label3.Location = New System.Drawing.Point(22, 60)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(56, 23)
+        Me.Label3.Size = New System.Drawing.Size(79, 29)
         Me.Label3.TabIndex = 28
         Me.Label3.Text = "顧客情報"
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(16, 128)
+        Me.Label2.Location = New System.Drawing.Point(22, 160)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(56, 23)
+        Me.Label2.Size = New System.Drawing.Size(79, 29)
         Me.Label2.TabIndex = 27
         Me.Label2.Text = "注文履歴"
         '
         'lstDate
         '
         Me.lstDate.Enabled = False
-        Me.lstDate.ItemHeight = 12
-        Me.lstDate.Location = New System.Drawing.Point(80, 128)
+        Me.lstDate.ItemHeight = 15
+        Me.lstDate.Location = New System.Drawing.Point(112, 160)
         Me.lstDate.Name = "lstDate"
-        Me.lstDate.Size = New System.Drawing.Size(168, 88)
+        Me.lstDate.Size = New System.Drawing.Size(235, 94)
         Me.lstDate.TabIndex = 26
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(16, 16)
+        Me.Label1.Location = New System.Drawing.Point(22, 20)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(40, 23)
+        Me.Label1.Size = New System.Drawing.Size(56, 29)
         Me.Label1.TabIndex = 25
         Me.Label1.Text = "顧客ID"
         '
         'txtTel
         '
         Me.txtTel.Enabled = False
-        Me.txtTel.Location = New System.Drawing.Point(80, 96)
+        Me.txtTel.Location = New System.Drawing.Point(112, 120)
         Me.txtTel.Name = "txtTel"
-        Me.txtTel.Size = New System.Drawing.Size(96, 19)
+        Me.txtTel.Size = New System.Drawing.Size(134, 22)
         Me.txtTel.TabIndex = 24
-        Me.txtTel.Text = ""
         '
         'txtAddr
         '
         Me.txtAddr.Enabled = False
-        Me.txtAddr.Location = New System.Drawing.Point(256, 72)
+        Me.txtAddr.Location = New System.Drawing.Point(358, 90)
         Me.txtAddr.Name = "txtAddr"
-        Me.txtAddr.Size = New System.Drawing.Size(200, 19)
+        Me.txtAddr.Size = New System.Drawing.Size(280, 22)
         Me.txtAddr.TabIndex = 23
-        Me.txtAddr.Text = ""
         '
         'txtPref
         '
         Me.txtPref.Enabled = False
-        Me.txtPref.Location = New System.Drawing.Point(184, 72)
+        Me.txtPref.Location = New System.Drawing.Point(258, 90)
         Me.txtPref.Name = "txtPref"
-        Me.txtPref.Size = New System.Drawing.Size(64, 19)
+        Me.txtPref.Size = New System.Drawing.Size(89, 22)
         Me.txtPref.TabIndex = 22
-        Me.txtPref.Text = ""
         '
         'txtZip
         '
         Me.txtZip.Enabled = False
-        Me.txtZip.Location = New System.Drawing.Point(80, 72)
+        Me.txtZip.Location = New System.Drawing.Point(112, 90)
         Me.txtZip.Name = "txtZip"
-        Me.txtZip.Size = New System.Drawing.Size(96, 19)
+        Me.txtZip.Size = New System.Drawing.Size(134, 22)
         Me.txtZip.TabIndex = 21
-        Me.txtZip.Text = ""
         '
         'txtHurigana
         '
         Me.txtHurigana.Enabled = False
-        Me.txtHurigana.Location = New System.Drawing.Point(184, 48)
+        Me.txtHurigana.Location = New System.Drawing.Point(258, 60)
         Me.txtHurigana.Name = "txtHurigana"
-        Me.txtHurigana.Size = New System.Drawing.Size(96, 19)
+        Me.txtHurigana.Size = New System.Drawing.Size(134, 22)
         Me.txtHurigana.TabIndex = 20
-        Me.txtHurigana.Text = ""
         '
         'txtName
         '
         Me.txtName.Enabled = False
-        Me.txtName.Location = New System.Drawing.Point(80, 48)
+        Me.txtName.Location = New System.Drawing.Point(112, 60)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(96, 19)
+        Me.txtName.Size = New System.Drawing.Size(134, 22)
         Me.txtName.TabIndex = 19
-        Me.txtName.Text = ""
         '
         'btnFind
         '
-        Me.btnFind.Location = New System.Drawing.Point(144, 16)
+        Me.btnFind.Location = New System.Drawing.Point(202, 20)
         Me.btnFind.Name = "btnFind"
+        Me.btnFind.Size = New System.Drawing.Size(105, 29)
         Me.btnFind.TabIndex = 18
         Me.btnFind.Text = "検索"
         '
         'txtID
         '
-        Me.txtID.Location = New System.Drawing.Point(80, 16)
+        Me.txtID.Location = New System.Drawing.Point(112, 20)
         Me.txtID.Name = "txtID"
-        Me.txtID.Size = New System.Drawing.Size(56, 19)
+        Me.txtID.Size = New System.Drawing.Size(78, 22)
         Me.txtID.TabIndex = 17
-        Me.txtID.Text = ""
         '
         'MainMenu1
         '
@@ -241,7 +236,7 @@ Public Class frmList
         '
         Me.DsSample1.DataSetName = "dsSample"
         Me.DsSample1.Locale = New System.Globalization.CultureInfo("ja-JP")
-        Me.DsSample1.Namespace = "http://www.tempuri.org/dsSample.xsd"
+        Me.DsSample1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'dvDetail
         '
@@ -249,9 +244,25 @@ Public Class frmList
         '
         'frmList
         '
-        Me.AutoScaleBaseSize = New System.Drawing.Size(5, 12)
-        Me.ClientSize = New System.Drawing.Size(488, 406)
-        Me.Controls.AddRange(New System.Windows.Forms.Control() {Me.btnDetail, Me.txtNo, Me.Label5, Me.dbgDetail, Me.Label4, Me.Label3, Me.Label2, Me.lstDate, Me.Label1, Me.txtTel, Me.txtAddr, Me.txtPref, Me.txtZip, Me.txtHurigana, Me.txtName, Me.btnFind, Me.txtID})
+        Me.AutoScaleBaseSize = New System.Drawing.Size(7, 15)
+        Me.ClientSize = New System.Drawing.Size(668, 406)
+        Me.Controls.Add(Me.btnDetail)
+        Me.Controls.Add(Me.txtNo)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.dbgDetail)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lstDate)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtTel)
+        Me.Controls.Add(Me.txtAddr)
+        Me.Controls.Add(Me.txtPref)
+        Me.Controls.Add(Me.txtZip)
+        Me.Controls.Add(Me.txtHurigana)
+        Me.Controls.Add(Me.txtName)
+        Me.Controls.Add(Me.btnFind)
+        Me.Controls.Add(Me.txtID)
         Me.Menu = Me.MainMenu1
         Me.Name = "frmList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
@@ -260,6 +271,7 @@ Public Class frmList
         CType(Me.DsSample1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dvDetail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -292,4 +304,59 @@ Public Class frmList
     End Sub
 
 
+    '-------------------------
+    '［検索］ボタン
+    '
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        Dim r As DataRow    '検索したレコード
+        Dim rr As DataRow() '抽出したレコード
+        Dim i As Integer    'カウンタ
+
+        '顧客IDが空のとき
+        If txtID.Text = "" Then
+            Exit Sub
+        End If
+
+        '顧客情報を検索
+        r = DsSample1.T_顧客.Rows.Find(txtID.Text)
+        If IsNothing(r) Then
+            MessageBox.Show("該当する［顧客ID］は見つかりません", "顧客検索")
+            txtName.Text = ""
+            txtHurigana.Text = ""
+            txtZip.Text = ""
+            txtPref.Text = ""
+            txtAddr.Text = ""
+            txtTel.Text = ""
+            lstDate.Items.Clear()
+            dbgDetail.DataSource = Nothing
+        Else
+            txtName.Text = r("氏名")
+            txtHurigana.Text = r("フリガナ")
+            txtZip.Text = r("郵便番号")
+            txtPref.Text = r("都道府県")
+            txtAddr.Text = r("住所")
+            txtTel.Text = r("電話番号")
+        End If
+
+        '注文履歴を取得
+        lstDate.Items.Clear()
+        rr = DsSample1.T_メイン.Select("顧客ID = " & txtID.Text)
+        For i = 0 To rr.Length - 1
+            lstDate.Items.Add(rr(i)("注文NO") & ControlChars.Tab & rr(i)("日付"))
+        Next
+    End Sub
+
+    '
+    '［詳細表示］ボタン
+    '
+    Private Sub btnDetail_Click(sender As Object, e As EventArgs) Handles btnDetail.Click
+        '注文NOが空のとき
+        If txtNo.Text = "" Then
+            Exit Sub
+        End If
+
+        '注文詳細を表示
+        dvDetail.RowFilter = "注文NO = " & txtNo.Text
+        dbgDetail.DataSource = dvDetail
+    End Sub
 End Class
