@@ -625,4 +625,39 @@ Public Class frmDenpyo
         'コントロール
         btnPrevious.Enabled = False
     End Sub
+
+    '
+    '［顧客ID］を変更したとき
+    '
+    Private Sub txtKokyakuID_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtKokyakuID.Validating
+        Dim r As DataRow   '検索したレコード
+
+        '検索
+        r = DsSample1.T_顧客.Rows.Find(txtKokyakuID.Text)
+        If IsNothing(r) Then
+            MessageBox.Show("該当する［顧客ID］は見つかりません", "伝票入力")
+            txtKokyakuName.Text = ""
+            e.Cancel = True
+        Else
+            txtKokyakuName.Text = r("氏名")
+        End If
+    End Sub
+
+    '
+    '［社員ID］を変更したとき
+    '
+    Private Sub txtShainID_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtShainID.Validating
+        Dim r As DataRow   '検索したレコード
+
+        '検索
+        r = DsSample1.T_社員.Rows.Find(txtShainID.Text)
+        If IsNothing(r) Then
+            MessageBox.Show("該当する［社員ID］は見つかりません", "伝票入力")
+            txtShainName.Text = ""
+            e.Cancel = True
+        Else
+            txtShainName.Text = r("氏名")
+        End If
+    End Sub
+
 End Class
