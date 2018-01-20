@@ -387,4 +387,18 @@ Public Class frmShohin
         'フィルタ実行
         dvShohin.RowFilter = "商品グループ = '" & fm.Value & "'"
     End Sub
+
+    '
+    '［昇順］メニュー
+    '
+    Private Sub mnuRecordSortAsc_Click(sender As Object, e As EventArgs) Handles mnuRecordSortAsc.Click
+        dvShohin.Sort = "単価"
+    End Sub
+
+    '
+    '［降順］メニュー
+    '
+    Private Sub mnuRecordSortDesc_Click(sender As Object, e As EventArgs) Handles mnuRecordSortDesc.Click
+        dvShohin.Sort = "単価 DESC"
+    End Sub
 End Class
