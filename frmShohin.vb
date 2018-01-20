@@ -367,4 +367,50 @@ Public Class frmShohin
         '保存
         m_fm.odaShohin.Update(DsSample1, "T_商品")
     End Sub
+
+    '------------------------
+    '［フィルタ］メニュー
+    '
+    Private Sub mnuRecordFilter_Click(sender As Object, e As EventArgs) Handles mnuRecordFilter.Click
+        Dim fm As New frmDialog()   '検索フォーム
+
+        'キャンセルされたとき
+        If fm.ShowDialog = DialogResult.Cancel Then
+            Exit Sub
+        End If
+
+        '値が入力されなかったとき
+        If fm.Value = "" Then
+            Exit Sub
+        End If
+
+        'フィルタ実行
+        dvShohin.RowFilter = "商品グループ = '" & fm.Value & "'"
+    End Sub
+
+    '
+    '［昇順］メニュー
+    '
+    Private Sub mnuRecordSortAsc_Click(sender As Object, e As EventArgs) Handles mnuRecordSortAsc.Click
+        dvShohin.Sort = "単価"
+    End Sub
+
+    '
+    '［降順］メニュー
+    '
+    Private Sub mnuRecordSortDesc_Click(sender As Object, e As EventArgs) Handles mnuRecordSortDesc.Click
+        dvShohin.Sort = "単価 DESC"
+    End Sub
+
+    '
+    '［フィルタ並べ替え解除］メニュー
+    '
+    Private Sub mnuRecordReset_Click(sender As Object, e As EventArgs) Handles mnuRecordReset.Click
+        'フィルタ並べ替え解除
+        dvShohin.RowFilter = ""
+        dvShohin.Sort = ""
+
+        '先頭レコードに移動
+        Me.BindingContext(dvShohin).Position = 0
+    End Sub
 End Class
